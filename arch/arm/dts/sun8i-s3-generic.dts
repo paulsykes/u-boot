@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Icenowy Zheng <icenowy@aosc.xyz>
+ * Copyright (C) 2020 Aodzip <aodzip@gmail.com>
  *
  * This file is dual-licensed: you can use it either under the terms
  * of the GPL or the X11 license, at your option. Note that this dual
@@ -41,12 +41,12 @@
  */
 
 /dts-v1/;
-#include "sun8i-v3s.dtsi"
+#include "sun8i-s3.dtsi"
 #include "sunxi-common-regulators.dtsi"
 
 / {
-	model = "Lichee Pi Zero";
-	compatible = "licheepi,licheepi-zero", "allwinner,sun8i-v3s";
+	model = "Allwinner S3 Generic Device";
+	compatible = "allwinner,sun8i-s3";
 
 	aliases {
 		serial0 = &uart0;
@@ -65,8 +65,13 @@
 };
 
 &mmc0 {
-	pinctrl-0 = <&mmc0_pins_a>;
-	pinctrl-names = "default";
+	broken-cd;
+	bus-width = <4>;
+	vmmc-supply = <&reg_vcc3v3>;
+	status = "okay";
+};
+
+&mmc2 {
 	broken-cd;
 	bus-width = <4>;
 	vmmc-supply = <&reg_vcc3v3>;
@@ -78,18 +83,14 @@
 };
 
 &uart0 {
-	pinctrl-0 = <&uart0_pins_a>;
-	pinctrl-names = "default";
 	status = "okay";
 };
 
 &usb_otg {
-	dr_mode = "otg";
 	status = "okay";
 };
 
 &usbphy {
-	usb0_id_det-gpio = <&pio 5 6 GPIO_ACTIVE_HIGH>;
 	status = "okay";
 };
 

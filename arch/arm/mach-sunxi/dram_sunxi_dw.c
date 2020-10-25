@@ -714,6 +714,22 @@ static void mctl_auto_detect_dram_size(uint16_t socid, struct dram_para *para)
 	   0,  0,  0,  0,  0,  0,  0,  0,			\
 	   0,  0,  0,  0,  0,  0,  0      }
 
+#define SUN8I_S3_DX_READ_DELAYS					\
+	{{  8,  8,  8,  8,  8,  8,  8,  8,  8,  0,  0 },	\
+	 {  7,  7,  7,  7,  7,  7,  7,  7,  7,  0,  0 },	\
+	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
+	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 }}
+#define SUN8I_S3_DX_WRITE_DELAYS				\
+	{{  0,  0,  0,  0,  0,  0,  0,  0,  0,  4,  4 },	\
+	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  2,  2 },	\
+	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 },	\
+	 {  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0 }}
+#define SUN8I_S3_AC_DELAYS					\
+	{  0,  0,  0,  0,  0,  0,  0,  0,			\
+	   0,  0,  0,  0,  0,  0,  0,  0,			\
+	   0,  0,  0,  0,  0,  0,  0,  0,			\
+	   0,  0,  0,  0,  0,  0,  0      }
+
 #define SUN8I_R40_DX_READ_DELAYS				\
 	{{ 14, 14, 14, 14, 14, 14, 14, 14, 14,  0,  0 },	\
 	 { 14, 14, 14, 14, 14, 14, 14, 14, 14,  0,  0 },	\
@@ -784,6 +800,10 @@ unsigned long sunxi_dram_init(void)
 		.dx_read_delays  = SUN8I_V3S_DX_READ_DELAYS,
 		.dx_write_delays = SUN8I_V3S_DX_WRITE_DELAYS,
 		.ac_delays	 = SUN8I_V3S_AC_DELAYS,
+#elif defined(CONFIG_MACH_SUN8I_S3)
+		.dx_read_delays  = SUN8I_S3_DX_READ_DELAYS,
+		.dx_write_delays = SUN8I_S3_DX_WRITE_DELAYS,
+		.ac_delays	 = SUN8I_S3_AC_DELAYS,
 #elif defined(CONFIG_MACH_SUN8I_R40)
 		.dx_read_delays  = SUN8I_R40_DX_READ_DELAYS,
 		.dx_write_delays = SUN8I_R40_DX_WRITE_DELAYS,
