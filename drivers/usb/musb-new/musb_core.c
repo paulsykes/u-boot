@@ -1878,6 +1878,7 @@ allocate_instance(struct device *dev,
 		ep->epnum = epnum;
 	}
 
+	musb->dyn_fifo = config->dyn_fifo;
 	musb->controller = dev;
 
 	return musb;
